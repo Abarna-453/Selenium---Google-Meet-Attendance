@@ -43,14 +43,15 @@ if __name__ == '__main__':
 
     # Sign in to google
     driver = webdriver.Chrome(options=opt, executable_path="C:\webdriver\chromedriver.exe") # eg. r"C:\Users\hp\Downloads\chromedriver_win32\chromedriver.exe"
-    driver.get('https://stackoverflow.com/users/signup?ssrc=head&returnurl=%2fusers%2fstory%2fcurrent%27')  # signing in to google through stack overflow
+    # driver.get('https://stackoverflow.com/users/signup?ssrc=head&returnurl=%2fusers%2fstory%2fcurrent%27')  # signing in to google through stack overflow
+    # sleep(2)
+    driver.get('https://myaccount.google.com/')
+    driver.find_element_by_xpath('/html/body/header/div[1]/div[5]/ul/li[2]/a').click()  # signing in with google
+    driver.find_element_by_xpath('/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div[1]/div/div[1]/div/div[1]/input').send_keys(gmail_id)  # entering the gmail id
+    driver.find_element_by_xpath('/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/div/button/span').click()
     sleep(2)
-    driver.find_element_by_xpath('//*[@id="openid-buttons"]/button[1]').click()  # signing in with google
-    driver.find_element_by_xpath('//input[@type="email"]').send_keys(gmail_id)  # entering the gmail id
-    driver.find_element_by_xpath('//*[@id="identifierNext"]').click()
-    sleep(2)
-    driver.find_element_by_xpath('//input[@type="password"]').send_keys(gmail_password)  # entering the password
-    driver.find_element_by_xpath('//*[@id="passwordNext"]').click()
+    driver.find_element_by_xpath('/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div[1]/div[1]/div/div/div/div/div[1]/div/div[1]/input').send_keys(gmail_password)  # entering the password
+    driver.find_element_by_xpath('/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/div/button/span').click()
     sleep(2)
 
     driver.get('https://meet.google.com/')
