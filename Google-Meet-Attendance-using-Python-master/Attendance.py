@@ -9,8 +9,8 @@ from time import sleep
 from openpyxl import load_workbook
 from openpyxl.utils import column_index_from_string
 from selenium import webdriver
-from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.chrome.options import Options
+
 
 
 # The function directly installs the required libraries
@@ -61,30 +61,20 @@ if __name__ == '__main__':
     sleep(1)
     driver.find_element_by_css_selector('button.VfPpkd-LgbsSe.VfPpkd-LgbsSe-OWXEXe-dgl2Hf.ksBjEc.lKxP2d.cjtUbb').click()  # join
     sleep(1)
-
-
-    cam_mic_selectors = driver.find_elements_by_css_selector('div.U26fgb.JRY2Pb.mUbCce.kpROve.yBiuPb.y1zVCf.M9Bg4d.FTMc0c.N2RpBe.jY9Dbb')  # camera and mic
-
-    for e in cam_mic_selectors:
-            turn_off_mic_action = ActionChains(driver)
-            turn_off_mic_action.key_down(Keys.CONTROL).send_keys("d").key_up(Keys.CONTROL).perform();
-            turn_off_camera_action = ActionChains(driver)
-            turn_off_camera_action.key_down(Keys.CONTROL).send_keys("e").key_up(Keys.CONTROL).perform();
-            print("Sucessfully found landmark...turned off camera and microphone.")
-            break
+    driver.find_element_by_xpath('/html/body/div[1]/c-wiz/div/div/div[9]/div[3]/div/div/div[3]/div/div/div[1]/div[1]/div/div[4]/div[1]/div/div/div').click()
+    driver.find_element_by_xpath('/html/body/div[1]/c-wiz/div/div/div[9]/div[3]/div/div/div[3]/div/div/div[1]/div[1]/div/div[4]/div[2]/div/div').click()
     sleep(2)
-    # for e in cam_mic_selectors:
-    #     e.click()
-    # sleep(2)
+
     driver.find_element_by_css_selector('div.uArJ5e.UQuaGc.Y5sE8d.uyXBBb.xKiqt').click()  # join now
     sleep(2)
-    driver.find_element_by_xpath('//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[10]/div[3]/div[2]/div/div/div[2]/span/button/i[1]').click()  # participant list
+    driver.find_element_by_xpath('/html/body/div[1]/c-wiz/div[1]/div/div[9]/div[3]/div[10]/div[3]/div[3]/div/div/div[2]/span/button').click()  # participant list
     sleep(1)
-    names = driver.find_elements_by_css_selector('span.ZjFb7c')  # participants
+    driver.get_screenshot_as_file("screenshot.png")
+    names = driver.find_elements_by_css_selector('span.ZjFb7c')  # participantsspan.ZjFb7c
     for e in names[1:]:
         print(e.text)
 
-    # n = int(driver.find_element_by_css_selector('div.eUyZxf span.rua5Nb').text.strip('(').strip(')'))  # no. of participants present
+    #n = int(driver.find_element_by_css_selector('div.eUyZxf span.rua5Nb').text.strip('(').strip(')'))  # no. of participants present
 
     wb = load_workbook('Google_Attendance.xlsx')
     sheet = wb['Attendance Sheet']
